@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 // [ --------- IMPORTS LOCALES --------- ] //
 import ArchivadorProductos from "./src/daos/archivadorDaoProductos.js";
 import { optionsMariaDB } from "./src/options/mariaDB.js";
@@ -20,11 +22,9 @@ import cookieParser from "cookie-parser";
 // >>>>>Socket
 import { Server as HttpServer } from "http";
 import { Server as IOServer } from "socket.io";
-// >>>>>Encryption
-import bcrypt from "bcrypt";
 // >>>>>MongoDB
 import MongoStore from "connect-mongo";
-import { mongoUri, advancedOptions } from "./src/daos/DaoUsuariosMongoDB.js";
+import { advancedOptions } from "./src/daos/DaoUsuariosMongoDB.js";
 // >>>>>Passport
 import "./src/middlewares/local-auth.js";
 import passport from "passport";
@@ -45,7 +45,7 @@ app.use(cookieParser());
 app.use(
     session({
         store: MongoStore.create({
-            mongoUrl: mongoUri,
+            mongoUrl: process.env.MONGO_URI,
             mongoOptions: advancedOptions,
         }),
         secret: "andywarhol",
@@ -174,7 +174,7 @@ app.post("/logout", isLogged, (req, res) => {
 
 // [ --------- CORRER EL SERVIDOR --------- ] //
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 httpServer.listen(PORT, () => console.log("Lisstooooo ", PORT));
 
 // [ --------- SOCKET --------- ] //

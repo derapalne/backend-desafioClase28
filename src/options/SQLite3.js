@@ -1,7 +1,9 @@
+import "dotenv/config";
+
 export const optionsSQLite = {
-    client: 'sqlite3',
+    client: process.env.SQLITE_CLIENT,
     connection: {
-        filename: "./src/DB/mydb.sqlite"
+        filename: process.env.SQLITE_DB,
     },
     useNullAsDefault: true,
 };
