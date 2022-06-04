@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos :)</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    body {
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+      text-align: center;
+      padding: 10px;
+      background-image: url('/images/back.png');
+      background-repeat: repeat;
+      background-color: rgb(19, 34, 80);
+      color: gainsboro;
+    }
+
+    .contenedor {
+      border: solid 1px gainsboro;
+      background-image: url('./images/backProds.png');
+      background-color: #77f;
+      width: 50%;
+      margin: auto;
+      padding: 10px;
+    }
+
+    #login {
+      background-image: url('./images/backLogin.png');
+    }
+
+    p {
+        font-family: cursive;
+    }
+
+    a {
+      background-color: #77f;
+      color:gainsboro;
+      padding: 5px;
+      border-radius: 10%;
+      text-decoration: none;
+    }
+
+    table {
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="login" class="contenedor">
+    <h1>Registrarse</h1>
+    <p>Poné tus datos acá que no se los vendemos a nadie ;)</p>
+    <br/>
+    <% if(error) { %>
+      <p style="color:rgb(24, 24, 24);font-weight: bold;"><%= error %></p>
+    <% } %>
+    <form action="/register" method="post">
+      <table>
+        <tr>
+          <td>
+            <label for="email">Email</label>
+          </td>
+          <td>
+            <input type="email" name="email" id="email" required/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="password">Contraseña</label>
+          </td>
+          <td>
+            <input type="password" name="password" id="password" required/>
+          </td>
+        </tr>
+      </table>
+      <br/>
+      <input type="submit" id="registrarse" value="Registrarse" />
+    </form>
+    <br/>
+  </div>
+  <br />
+  <a href="/login">Loguearse</a>
+  <script src="/login.js"></script>
+</body>
+
+</html>
