@@ -6,11 +6,10 @@ import { optionsSQLite } from "./src/options/SQLite3.js";
 import Mocker from "./src/utils/mocker.js";
 const mocker = new Mocker();
 import inicializarProductos from "./src/utils/init.js";
-import Usuario from "./src/models/usuario.model.js";
 
 // [ --------- MIDDLEWARE --------- ] //
 
-import { isLogged } from "./src/middlewares/middleware.js";
+import { isLogged } from "./src/middlewares/isLogged.js";
 
 // [ --------- IMPORTS NPM --------- ] //
 
@@ -121,10 +120,10 @@ app.get("/api/productos-test", async (req, res) => {
 
 app.get("/login", (req, res) => {
     try {
-        if (req.user) {
+        if (req.isAuthenticated()) {
             res.redirect("/");
         } else {
-            res.status(200).render("login", { error: app.locals.loginMessage });
+            res.status(200).render("login");
         }
     } catch (e) {
         res.status(500).send(e);
@@ -132,10 +131,10 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-    if (req.session.passport.user) {
+    if (req.isAuthenticated()) {
         res.status(200).redirect("/");
     }
-    res.status(200).render("register", { error: app.locals.registerMessage });
+    res.status(200).render("register");
 });
 
 app.get("/datos", (req, res) => {
