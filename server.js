@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 // [ --------- IMPORTS LOCALES --------- ] //
 import ArchivadorProductos from "./src/daos/archivadorDaoProductos.js";
@@ -8,6 +8,7 @@ import { optionsSQLite } from "./src/options/SQLite3.js";
 import Mocker from "./src/utils/mocker.js";
 const mocker = new Mocker();
 import inicializarProductos from "./src/utils/init.js";
+import routerRandom from "./src/routes/randomsRoute.js";
 
 // [ --------- MIDDLEWARE --------- ] //
 
@@ -31,8 +32,8 @@ import passport from "passport";
 // >>>>>Flash
 import flash from "connect-flash";
 // >>>>>Minimist
-import parseArgs from 'minimist';
-import { parse } from 'path';
+import parseArgs from "minimist";
+import { parse } from "path";
 
 // [ --------- CONFIGURACION --------- ] //
 
@@ -63,6 +64,8 @@ app.use(
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/api/random', routerRandom);
 
 app.use((err, req, res, next) => {
     app.locals.registerMessage = req.flash("registerMessage");
@@ -145,8 +148,16 @@ app.get("/datos", (req, res) => {
 });
 
 app.get("/info", (req, res) => {
-    res.render('info');
-})
+    res.render("info", {
+        args: process.argv.slice(2).join(" "),
+        os: process.platform,
+        nodeVersion: process.version,
+        memory: process.memoryUsage().rss,
+        path: process.execPath,
+        pid: process.pid,
+        folder: process.cwd(),
+    });
+});
 
 app.post(
     "/register",

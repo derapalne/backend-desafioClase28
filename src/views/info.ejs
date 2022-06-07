@@ -6,30 +6,30 @@
 </head>
 
 <body>
-  <div id="login" class="contenedor">
+  <div id="login" class="contenedor" style="width:70%">
     <h1>Acá está la data compi</h1>
-    <table id="input-table">
+    <table id="tabla">
       <tr>
         <td>Argumentos de entrada:</td>
-        <td><%= data.argumentos %></td>
+        <td><%= args %></td>
         <td>Nombre de la plataforma:</td>
-        <td><%= data.os %></td>
+        <td><%= os %></td>
       </tr>
       <tr>
         <td>Versión de Node.js:</td>
-        <td><%= data.nodeVersion %></td>
+        <td><%= nodeVersion %></td>
         <td>Memoria total reservada:</td>
-        <td><%= data.memory %></td>
+        <td><%= memory %></td>
       </tr>
       <tr>
         <td>Path de ejecución:</td>
-        <td><%= data.path %></td>
+        <td><%= path %></td>
         <td>ID de Proceso</td>
-        <td><%= data.pid %></td>
+        <td><%= pid %></td>
       </tr>
       <tr>
         <td>Carpeta del proyecto:</td>
-        <td><%= data.folder %></td>
+        <td><%= folder %></td>
       </tr>
     </table>
   </div>
