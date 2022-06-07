@@ -30,6 +30,9 @@ import "./src/middlewares/local-auth.js";
 import passport from "passport";
 // >>>>>Flash
 import flash from "connect-flash";
+// >>>>>Minimist
+import parseArgs from 'minimist';
+import { parse } from 'path';
 
 // [ --------- CONFIGURACION --------- ] //
 
@@ -141,6 +144,10 @@ app.get("/datos", (req, res) => {
     res.json(req.session);
 });
 
+app.get("/info", (req, res) => {
+    res.render('info');
+})
+
 app.post(
     "/register",
     passport.authenticate("local-register", {
@@ -174,7 +181,8 @@ app.post("/logout", isLogged, (req, res) => {
 
 // [ --------- CORRER EL SERVIDOR --------- ] //
 
-const PORT = process.env.PORT || 8080;
+const PORT = parseArgs(process.argv.slice(2)).port || 8080;
+
 httpServer.listen(PORT, () => console.log("Lisstooooo ", PORT));
 
 // [ --------- SOCKET --------- ] //
